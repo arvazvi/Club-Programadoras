@@ -99,3 +99,57 @@ def dibujar_mensaje_final(pantalla, rebotes):
     pantalla.update()
 
     return texto
+
+# def nuevo_jugador(color,x,y):
+#     jugador= turtle.Turtle()
+#     jugador.shape("turtle")
+#     jugador.color(color)
+#     jugador.penup()
+#     jugador.goto(x,y)
+
+#     return jugador
+
+
+
+# def mover(jugador,angulo):
+#     jugador.setheading(angulo)
+#     jugador.forward(20)
+
+# def activar_teclas(pantalla,jugador):
+#     # onkey necesita funciones sin parametros, las definimos aqui por que ya tendriamos a juagador
+#     def arriba():
+#         mover(jugador,90)
+#     def abajo():
+#         mover(jugador,270)
+#     def izquierda():
+#         mover(jugador,180)
+#     def derecha():
+#         mover(jugador,0)
+
+#     pantalla.listen()
+#     pantalla.onkey(arriba,"Up")
+#     pantalla.onkey(abajo,"Down")
+#     pantalla.onkey(izquierda,"Left")
+#     pantalla.onkey(derecha,"Right")
+
+# def dibujar_mensaje_reiniciar(pantalla):
+#     texto = nuevo_lapiz()
+#     texto.goto(0,-120)
+#     texto.color("white")
+#     texto.write("Presiona ENTER para jugar de nuevo", align="center", font=("Arial",16,"normal"))
+#     return texto
+
+# enter_presionado = False
+
+# def presionar_enter():
+#     global enter_presionado
+#     enter_presionado= True
+
+# def esperar_enter(pantalla):
+#     global enter_presionado
+#     enter_presionado = False
+#     pantalla.onkey(presionar_enter,"Return")
+#     pantalla.listen()
+#     while not enter_presionado:
+#         pantalla.update()
+#         time.sleep(0.05)

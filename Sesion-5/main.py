@@ -42,9 +42,21 @@ rebotes = 0
 velocidad = 6
 tamano = 1
 
+# ---------- El jugador ----------
+# jugador = f.nuevo_jugador("white",0,-220)
+# f.activar_teclas(pantalla,jugador)
+
+# Si la pelota nos toca, cambia a False
+# gano = True
+
 # # ---------- Bucle infinito ----------
 while True:
     pelota.forward(velocidad)
+
+ # Si la pelota toca al jugador, perdemos
+ #  if pelota.distance(jugador) < 20:
+ #      gano = False
+ #     break
 
     x = pelota.xcor()
     y = pelota.ycor()
@@ -96,5 +108,20 @@ f.dibujar_fuegos_artificiales(pantalla, chispas, colores)
 
 # # Mensaje final con sombra de color
 # funciones.dibujar_mensaje_final(pantalla, rebotes)
+
+# if gano:
+#  # Sobrevivimos los 10 rebotes: fuegos artificiales
+#     pelota.hideturtle()
+#     f.dibujar_fuegos_artificiales(pantalla, chispas, colores)
+# else:
+#  # La pelota nos atrapó: mensaje final con sombra de color
+#     f.dibujar_mensaje_final(pantalla, rebotes)
+
+# Repetimos si presionan enter
+# f.dibujar_mensaje_reiniciar(pantalla)
+# f.esperar_enter(pantalla)
+
+# pantalla.clear()
+# f.nueva_pantalla(700,700,"black","Pinball Neon")
 
 turtle.done()
