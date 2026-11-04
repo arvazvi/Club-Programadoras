@@ -1,7 +1,7 @@
 import random
 import time
 
-import f
+import functions as f
 import turtle
 
 colores = ["red", "cyan", "magenta", "yellow", "lime", "orange", "deepskyblue"]
