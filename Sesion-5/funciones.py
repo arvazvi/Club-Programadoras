@@ -7,18 +7,22 @@ def nueva_pantalla(ancho, alto, color_fondo, titulo):
     pantalla.setup(ancho, alto)
     pantalla.bgcolor(color_fondo)
     pantalla.title(titulo)
+    # El área de dibujo mide 400 x 300 por defecto. En Mac con Python 3.15 no
+    # se centra en una ventana más grande y el juego sale recortado.
+    # La hacemos casi del tamaño de la ventana para que quede centrada.
+    pantalla.screensize(ancho - 10, alto - 10)
     pantalla.tracer(0)
-
+ 
     return pantalla
-
+ 
 def dibujar_cielo(min_x, min_y, max_x, max_y, min_tamano, max_tamano, color="white", n_estrellas=80):
     lapiz = turtle.Turtle()
     lapiz.hideturtle()
     lapiz.penup()
-    for i in range(80):
+    for i in range(n_estrellas):
         lapiz.goto(random.randint(min_x, max_x), random.randint(min_y, max_y))
         lapiz.dot(random.randint(min_tamano, max_tamano), color)
-
+ 
 def dibujar_pared(start_x, start_y, tamano, color_top, color_back):
     lapiz = turtle.Turtle()
     lapiz.hideturtle()
@@ -35,7 +39,7 @@ def dibujar_pared(start_x, start_y, tamano, color_top, color_back):
     for lado in range(4):
         lapiz.forward(580)
         lapiz.left(90)
-
+ 
 def dibujar_marcador():
     marcador = turtle.Turtle()
     marcador.hideturtle()
@@ -43,15 +47,15 @@ def dibujar_marcador():
     marcador.goto(0, 305)
     marcador.color("white")
     marcador.write("REBOTES: 0", align="center", font=("Arial", 18, "bold"))
-
+ 
     return marcador
-
+ 
 def nuevo_lapiz():
     lapiz = turtle.Turtle()
     lapiz.hideturtle()
     lapiz.penup()
     return lapiz
-
+ 
 def dibujar_chispas(lapiz, centro_x, centro_y, paso, color, n_rayos=12, distancia=4, gravedad=0.15, tamano=12):
     # Dibuja un círculo de chispas que se alejan del centro, caen y se achican según el paso
     for rayo in range(n_rayos):
@@ -60,16 +64,16 @@ def dibujar_chispas(lapiz, centro_x, centro_y, paso, color, n_rayos=12, distanci
         lapiz.forward(paso * distancia)
         lapiz.sety(lapiz.ycor() - paso * paso * gravedad)   # gravedad
         lapiz.dot(tamano - paso // 2, color)
-
+ 
 def nueva_pelota(color, tamano):
     pelota = turtle.Turtle()
     pelota.shape("circle")
     pelota.color(color)
     pelota.pensize(tamano)
     pelota.setheading(random.randint(0, 360))
-
+ 
     return pelota
-
+ 
 def dibujar_fuegos_artificiales(pantalla, lapiz, colores, n_fuegos=6):
     # Lanza varios fuegos artificiales en posiciones y colores al azar
     for fuego in range(n_fuegos):
@@ -83,7 +87,7 @@ def dibujar_fuegos_artificiales(pantalla, lapiz, colores, n_fuegos=6):
             pantalla.update()
             time.sleep(0.02)
     lapiz.clear()
-
+ 
 def dibujar_mensaje_final(pantalla, rebotes):
     # Mensaje final con sombra de color
     texto = nuevo_lapiz()
@@ -97,59 +101,60 @@ def dibujar_mensaje_final(pantalla, rebotes):
     texto.color("cyan")
     texto.write("Total de rebotes: " + str(rebotes), align="center", font=("Arial", 18, "bold"))
     pantalla.update()
-
+ 
     return texto
-
-# def nuevo_jugador(color,x,y):
-#     jugador= turtle.Turtle()
-#     jugador.shape("turtle")
-#     jugador.color(color)
-#     jugador.penup()
-#     jugador.goto(x,y)
-
-#     return jugador
-
-
-
-# def mover(jugador,angulo):
-#     jugador.setheading(angulo)
-#     jugador.forward(20)
-
-# def activar_teclas(pantalla,jugador):
-#     # onkey necesita funciones sin parametros, las definimos aqui por que ya tendriamos a juagador
-#     def arriba():
-#         mover(jugador,90)
-#     def abajo():
-#         mover(jugador,270)
-#     def izquierda():
-#         mover(jugador,180)
-#     def derecha():
-#         mover(jugador,0)
-
-#     pantalla.listen()
-#     pantalla.onkey(arriba,"Up")
-#     pantalla.onkey(abajo,"Down")
-#     pantalla.onkey(izquierda,"Left")
-#     pantalla.onkey(derecha,"Right")
-
-# def dibujar_mensaje_reiniciar(pantalla):
-#     texto = nuevo_lapiz()
-#     texto.goto(0,-120)
-#     texto.color("white")
-#     texto.write("Presiona ENTER para jugar de nuevo", align="center", font=("Arial",16,"normal"))
-#     return texto
-
-# enter_presionado = False
-
-# def presionar_enter():
-#     global enter_presionado
-#     enter_presionado= True
-
-# def esperar_enter(pantalla):
-#     global enter_presionado
-#     enter_presionado = False
-#     pantalla.onkey(presionar_enter,"Return")
-#     pantalla.listen()
-#     while not enter_presionado:
-#         pantalla.update()
-#         time.sleep(0.05)
+ 
+def nuevo_jugador(color,x,y):
+    jugador= turtle.Turtle()
+    jugador.shape("turtle")
+    jugador.color(color)
+    jugador.penup()
+    jugador.goto(x,y)
+ 
+    return jugador
+ 
+ 
+ 
+def mover(jugador,angulo):
+    jugador.setheading(angulo)
+    jugador.forward(20)
+ 
+def activar_teclas(pantalla,jugador):
+    # onkey necesita funciones sin parametros, las definimos aqui por que ya tendriamos a juagador
+    def arriba():
+        mover(jugador,90)
+    def abajo():
+        mover(jugador,270)
+    def izquierda():
+        mover(jugador,180)
+    def derecha():
+        mover(jugador,0)
+        
+    pantalla.listen()
+    pantalla.onkey(arriba,"Up")
+    pantalla.onkey(abajo,"Down")
+    pantalla.onkey(izquierda,"Left")
+    pantalla.onkey(derecha,"Right")
+ 
+def dibujar_mensaje_reiniciar(pantalla):
+    texto = nuevo_lapiz()
+    texto.goto(0,-120)
+    texto.color("white")
+    texto.write("Presiona ENTER para jugar de nuevo", align="center", font=("Arial",16,"normal"))
+    return texto
+ 
+enter_presionado = False
+ 
+def presionar_enter():
+    global enter_presionado
+    enter_presionado= True
+ 
+def esperar_enter(pantalla):
+    global enter_presionado
+    enter_presionado = False
+    pantalla.onkey(presionar_enter,"Return")
+    pantalla.listen()
+    while not enter_presionado:
+        pantalla.update()
+        time.sleep(0.05)
+ 
