@@ -158,3 +158,12 @@ def esperar_enter(pantalla):
         pantalla.update()
         time.sleep(0.05)
  
+
+# ---------- NUEVO (sesión 6): funciones que reciben una lista ----------
+def esconder_todas(lista):
+    for tortuga in lista:
+        tortuga.hideturtle()
+
+def actualizar_marcador(marcador, rebotes, pelotas):
+    marcador.clear()
+    marcador.write("REBOTES: " + str(rebotes) + "   PELOTAS: " + str(len(pelotas)), align="center", font=("Arial", 18, "bold"))
